@@ -51,12 +51,12 @@ package:
   individually: true
 
 functions:
-  hello:
-    handler: CsharpHandlers::AwsDotnetCsharp.Handler::Hello
+  CreateNewPGCTopic:
+    handler: CatchTheRun::TopicManagement.CreateNewPGCTopic::Execute
 
     # you can add packaging information here
     package:
-      artifact: bin/release/netcoreapp2.1/hello.zip
+      artifact: bin/release/netcoreapp2.1/catch-the-run.zip
     #  exclude:
     #    - exclude-me.js
     #    - exclude-me-dir/**
