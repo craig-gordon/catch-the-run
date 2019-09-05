@@ -21,6 +21,7 @@ service: catch-the-run
 
 provider:
   name: aws
+  region: us-east-1
   runtime: dotnetcore2.1
 
 # you can overwrite defaults here
@@ -53,7 +54,7 @@ package:
 functions:
   CreateNewPGCTopic:
     handler: CatchTheRun::TopicManagement.CreateNewPGCTopic::Execute
-
+        
     # you can add packaging information here
     package:
       artifact: bin/release/netcoreapp2.1/catch-the-run.zip
