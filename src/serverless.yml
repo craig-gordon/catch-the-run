@@ -54,6 +54,9 @@ package:
 functions:
   CreateNewPGCTopic:
     handler: CatchTheRun::TopicManagement.CreateNewPGCTopic::Execute
+
+  CreateNewPGCSubscription:
+    handler: CatchTheRun::SubscriptionManagement.CreateNewPGCSubscription::Execute
         
     # you can add packaging information here
     package:
