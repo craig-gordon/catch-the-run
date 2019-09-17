@@ -13,14 +13,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SubscriptionManagement
 {
-    public class CreateNewPGCSubscription
+    public class CreateSubscription
     {
         private readonly IServiceProvider serviceProvider;
-        public CreateNewPGCSubscription() : this(SubscriptionManagementConfiguration.BuildContainer().BuildServiceProvider())
+        public CreateSubscription() : this(SubscriptionManagementConfiguration.BuildContainer().BuildServiceProvider())
         {
         }
 
-        public CreateNewPGCSubscription(IServiceProvider serviceProvider)
+        public CreateSubscription(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
         }
@@ -38,10 +38,8 @@ namespace SubscriptionManagement
             var reqBody = JsonConvert.DeserializeObject<CreateSubscriptionRequestBody>(req.Body);
             using (var SNSClient = this.serviceProvider.GetService<IAmazonSimpleNotificationService>())
             {
-                var topic = await SNSClient.FindTopicAsync($"{TruncateSpaces(reqBody.Player)}_{TruncateSpaces(reqBody.Game)}_{TruncateSpaces(reqBody.Category)}");
-                var subscribeRequest = new SubscribeRequest();
-                subscribeRequest.TopicArn = topic.TopicArn;
-                subscribeRequest.Endpoint = reqBody.Endpoint;
+                var topic = await SNSClient.FindTopicAsync(reqBody.Player);
+                var subscribeRequest = new SubscribeRequest() { TopicArn = topic.TopicArn, Endpoint = reqBody.Endpoint, ReturnSubscriptionArn = true };
                 switch (reqBody.Protocol)
                 {
                     case "SMS":
@@ -62,7 +60,6 @@ namespace SubscriptionManagement
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
-                subscribeRequest.ReturnSubscriptionArn = true;
 
                 var source = new CancellationTokenSource();
                 var cancellationToken = source.Token;
@@ -70,12 +67,6 @@ namespace SubscriptionManagement
                 var res = await SNSClient.SubscribeAsync(subscribeRequest, cancellationToken);
                 return res;
             }
-        }
-
-        private static string TruncateSpaces(string str)
-        {
-            str = str.Replace(" ", String.Empty);
-            return str.Replace("%", String.Empty);
         }
     }
 }

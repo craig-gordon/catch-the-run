@@ -11,14 +11,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace TopicManagement
 {
-    public class CreateNewPGCTopic
+    public class CreateTopic
     {
         private readonly IServiceProvider serviceProvider;
-        public CreateNewPGCTopic() : this(TopicManagementConfiguration.BuildContainer().BuildServiceProvider())
+        public CreateTopic() : this(TopicManagementConfiguration.BuildContainer().BuildServiceProvider())
         {
         }
 
-        public CreateNewPGCTopic(IServiceProvider serviceProvider)
+        public CreateTopic(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
         }
@@ -36,15 +36,8 @@ namespace TopicManagement
             var reqBody = JsonConvert.DeserializeObject<CreateTopicRequestBody>(req.Body);
             using (var SNSClient = this.serviceProvider.GetService<IAmazonSimpleNotificationService>())
             {
-                var res = await SNSClient.CreateTopicAsync($"{TruncateSpaces(reqBody.Player)}_{TruncateSpaces(reqBody.Game)}_{TruncateSpaces(reqBody.Category)}");
-                return res;
+                return await SNSClient.CreateTopicAsync(reqBody.Player);
             }
-        }
-
-        private static string TruncateSpaces(string str)
-        {
-            str = str.Replace(" ", String.Empty);
-            return str.Replace("%", String.Empty);
         }
     }
 }

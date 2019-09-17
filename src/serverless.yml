@@ -53,10 +53,10 @@ package:
 
 functions:
   CreateNewPGCTopic:
-    handler: CatchTheRun::TopicManagement.CreateNewPGCTopic::Execute
+    handler: CatchTheRun::TopicManagement.CreateTopic::Execute
 
   CreateNewPGCSubscription:
-    handler: CatchTheRun::SubscriptionManagement.CreateNewPGCSubscription::Execute
+    handler: CatchTheRun::SubscriptionManagement.CreateSubscription::Execute
         
     # you can add packaging information here
     package:
