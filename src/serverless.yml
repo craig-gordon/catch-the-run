@@ -52,11 +52,14 @@ package:
   individually: true
 
 functions:
-  CreateNewPGCTopic:
+  CreateTopic:
     handler: CatchTheRun::TopicManagement.CreateTopic::Execute
 
-  CreateNewPGCSubscription:
+  CreateSubscription:
     handler: CatchTheRun::SubscriptionManagement.CreateSubscription::Execute
+
+  ProcessPlayerEvent:
+    handler: CatchTheRun::NotificationProcessing.ProcessPlayerEvent::Execute
         
     # you can add packaging information here
     package:
