@@ -26,7 +26,7 @@ namespace SubscriptionManagement
         }
 
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public async Task<SubscribeResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
+        public async Task<APIGatewayProxyResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
         {
             ctx.Logger.LogLine($"Lambda Context: {JsonConvert.SerializeObject(ctx)}");
             ctx.Logger.LogLine($"Resource: {req.Resource}");
@@ -61,11 +61,11 @@ namespace SubscriptionManagement
                         throw new ArgumentOutOfRangeException();
                 }
 
-                var source = new CancellationTokenSource();
-                var cancellationToken = source.Token;
-
-                var res = await SNSClient.SubscribeAsync(subscribeRequest, cancellationToken);
-                return res;
+                var res = await SNSClient.SubscribeAsync(subscribeRequest, new CancellationTokenSource().Token);
+                if (res.SubscriptionArn != null)
+                    return new APIGatewayProxyResponse() { StatusCode = 200 };
+                else
+                    return new APIGatewayProxyResponse() { StatusCode = 400 };
             }
         }
     }

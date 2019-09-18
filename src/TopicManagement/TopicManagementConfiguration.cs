@@ -23,7 +23,7 @@ namespace TopicManagement
 
             services
                 .AddDefaultAWSOptions(configurationRoot.GetAWSOptions())
-                .AddAWSService<IAmazonSimpleNotificationService>();
+                .AddAWSService<IAmazonSimpleNotificationService>(ServiceLifetime.Transient);
 
             return services;
         }

@@ -27,7 +27,7 @@ namespace SubscriptionManagement
 
             services
                 .AddDefaultAWSOptions(configurationRoot.GetAWSOptions())
-                .AddAWSService<IAmazonSimpleNotificationService>();
+                .AddAWSService<IAmazonSimpleNotificationService>(ServiceLifetime.Transient);
 
             return services;
         }

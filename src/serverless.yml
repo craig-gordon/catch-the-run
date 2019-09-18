@@ -49,6 +49,7 @@ provider:
 #    variable1: value1
 
 package:
+  artifact: bin/release/netcoreapp2.1/catch-the-run.zip
   individually: true
 
 functions:
@@ -62,8 +63,6 @@ functions:
     handler: CatchTheRun::NotificationProcessing.ProcessPlayerEvent::Execute
         
     # you can add packaging information here
-    package:
-      artifact: bin/release/netcoreapp2.1/catch-the-run.zip
     #  exclude:
     #    - exclude-me.js
     #    - exclude-me-dir/**

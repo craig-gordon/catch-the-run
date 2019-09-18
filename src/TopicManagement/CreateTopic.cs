@@ -5,6 +5,7 @@ using Amazon.Lambda.APIGatewayEvents;
 using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
 using System.Net.Http;
+using System.Net;
 using System;
 using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ namespace TopicManagement
         }
 
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public async Task<CreateTopicResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
+        public async Task<APIGatewayProxyResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
         {
             ctx.Logger.LogLine($"Lambda Context: {JsonConvert.SerializeObject(ctx)}");
             ctx.Logger.LogLine($"Resource: {req.Resource}");
@@ -34,9 +35,13 @@ namespace TopicManagement
             ctx.Logger.LogLine($"RequestContext: {JsonConvert.SerializeObject(req.RequestContext)}");
 
             var reqBody = JsonConvert.DeserializeObject<CreateTopicRequestBody>(req.Body);
-            using (var SNSClient = this.serviceProvider.GetService<IAmazonSimpleNotificationService>())
+            using (var SNSClient = serviceProvider.GetService<IAmazonSimpleNotificationService>())
             {
-                return await SNSClient.CreateTopicAsync(reqBody.Player);
+                var res = await SNSClient.CreateTopicAsync(reqBody.Player);
+                if (res.TopicArn != null)
+                    return new APIGatewayProxyResponse() { StatusCode = 200 };
+                else
+                    return new APIGatewayProxyResponse() { StatusCode = 400 };
             }
         }
     }

@@ -25,7 +25,7 @@ namespace NotificationProcessing
         }
 
         [LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-        public async Task<PublishResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
+        public async Task<APIGatewayProxyResponse> Execute(APIGatewayProxyRequest req, ILambdaContext ctx)
         {
             ctx.Logger.LogLine($"Lambda Context: {JsonConvert.SerializeObject(ctx)}");
             ctx.Logger.LogLine($"Resource: {req.Resource}");
@@ -39,7 +39,11 @@ namespace NotificationProcessing
             {
                 var topic = await SNSClient.FindTopicAsync(reqBody.Player);
                 var publishRequest = new PublishRequest() { TopicArn = topic.TopicArn, Message = reqBody.Message };
-                return await SNSClient.PublishAsync(publishRequest, new CancellationTokenSource().Token);
+                var res = await SNSClient.PublishAsync(publishRequest, new CancellationTokenSource().Token);
+                if (res.MessageId != null)
+                    return new APIGatewayProxyResponse() { StatusCode = 200 };
+                else
+                    return new APIGatewayProxyResponse() { StatusCode = 400 };
             }
         }
     }
