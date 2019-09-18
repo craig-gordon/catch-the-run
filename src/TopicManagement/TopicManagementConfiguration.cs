@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Amazon.SimpleNotificationService;
+using Amazon.DynamoDBv2;
 
 namespace TopicManagement
 {
@@ -23,7 +24,8 @@ namespace TopicManagement
 
             services
                 .AddDefaultAWSOptions(configurationRoot.GetAWSOptions())
-                .AddAWSService<IAmazonSimpleNotificationService>(ServiceLifetime.Transient);
+                .AddAWSService<IAmazonSimpleNotificationService>(ServiceLifetime.Transient)
+                .AddAWSService<IAmazonDynamoDB>(ServiceLifetime.Transient);
 
             return services;
         }
