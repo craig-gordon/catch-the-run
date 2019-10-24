@@ -1,10 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
-using Amazon.Lambda.SNSEvents;
 using Amazon.Lambda.APIGatewayEvents;
-using Amazon.SimpleNotificationService;
-using Amazon.SimpleNotificationService.Model;
 using System.Net.Http;
 using System;
 using Newtonsoft.Json;
@@ -35,16 +32,16 @@ namespace NotificationProcessing
             ctx.Logger.LogLine($"RequestContext: {JsonConvert.SerializeObject(req.RequestContext)}");
 
             var reqBody = JsonConvert.DeserializeObject<PlayerEventRequestBody>(req.Body);
-            using (var SNSClient = this.serviceProvider.GetService<IAmazonSimpleNotificationService>())
-            {
-                var topic = await SNSClient.FindTopicAsync(reqBody.Player);
-                var publishRequest = new PublishRequest() { TopicArn = topic.TopicArn, Message = reqBody.Message };
-                var res = await SNSClient.PublishAsync(publishRequest, new CancellationTokenSource().Token);
-                if (res.MessageId != null)
-                    return new APIGatewayProxyResponse() { StatusCode = 200 };
-                else
-                    return new APIGatewayProxyResponse() { StatusCode = 400 };
-            }
+            //using (var SNSClient = this.serviceProvider.GetService<IAmazonSimpleNotificationService>())
+            //{
+            //    var topic = await SNSClient.FindTopicAsync(reqBody.Player);
+            //    var publishRequest = new PublishRequest() { TopicArn = topic.TopicArn, Message = reqBody.Message };
+            //    var res = await SNSClient.PublishAsync(publishRequest, new CancellationTokenSource().Token);
+            //    if (res.MessageId != null)
+            return new APIGatewayProxyResponse() { StatusCode = 200 };
+            //    else
+            //        return new APIGatewayProxyResponse() { StatusCode = 400 };
+            //}
         }
     }
 }

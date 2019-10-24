@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading;
+﻿using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Amazon.SimpleNotificationService;
-using Amazon.SimpleNotificationService.Model;
-using Amazon.Runtime.Internal;
+using Amazon.DynamoDBv2;
 
 namespace NotificationProcessing
 {
@@ -27,7 +23,7 @@ namespace NotificationProcessing
 
             services
                 .AddDefaultAWSOptions(configurationRoot.GetAWSOptions())
-                .AddAWSService<IAmazonSimpleNotificationService>(ServiceLifetime.Transient);
+                .AddAWSService<IAmazonDynamoDB>(ServiceLifetime.Transient);
 
             return services;
         }
