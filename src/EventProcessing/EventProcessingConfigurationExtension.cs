@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NotificationProcessing
+namespace CatchTheRun.EventProcessing
 {
-    public static class NotificationProcessingConfigurationExtension
+    public static class EventProcessingConfigurationExtension
     {
         public static IServiceCollection BindAndConfigure<TConfig>(this IServiceCollection services, IConfigurationSection section, TConfig config) where TConfig : class, new()
         {

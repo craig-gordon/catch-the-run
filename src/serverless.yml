@@ -53,14 +53,14 @@ package:
   individually: true
 
 functions:
-  CreateTopic:
-    handler: CatchTheRun::CatchTheRun.FeedManagement.CreateTopic::Execute
+  CreateFeed:
+    handler: CatchTheRun::CatchTheRun.FeedManagement.CreateFeed::Execute
 
   CreateSubscription:
     handler: CatchTheRun::CatchTheRun.SubscriptionManagement.CreateSubscription::Execute
 
-  ProcessPlayerEvent:
-    handler: CatchTheRun::CatchTheRun.NotificationProcessing.ProcessPlayerEvent::Execute
+  ProcessEvent:
+    handler: CatchTheRun::CatchTheRun.EventProcessing.ProcessEvent::Execute
         
     # you can add packaging information here
     #  exclude:

@@ -39,7 +39,6 @@ namespace CatchTheRun.SubscriptionManagement
                     { "SRT", new AttributeValue() { S = $"F|SUB|{reqBody.ConsumerName}"} }
                 };
                 var getSubResponse = await DynamoClient.GetItemAsync("Main", key);
-                ctx.Logger.LogLine($"Get Sub Response: {JsonConvert.SerializeObject(getSubResponse)}");
 
                 if (!getSubResponse.IsItemSet)
                 {

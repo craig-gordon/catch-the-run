@@ -1,8 +1,8 @@
-﻿namespace NotificationProcessing
+﻿namespace CatchTheRun.EventProcessing
 {
-    public class PlayerEventRequestBody
+    public class EventRequestBody
     {
-        public string Player { get; set; }
+        public string ProviderName { get; set; }
         public string Game { get; set; }
         public string Category { get; set; }
         public string SplitName { get; set; }

@@ -3,9 +3,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Amazon.DynamoDBv2;
 
-namespace NotificationProcessing
+namespace CatchTheRun.EventProcessing
 {
-    public class NotificationProcessingConfiguration
+    public class EventProcessingConfiguration
     {
         public static IServiceCollection BuildContainer()
         {
