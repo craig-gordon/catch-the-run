@@ -1,0 +1,10 @@
+{
+  "name": "catch-the-run",
+  "version": "1.0.0",
+  "description": "Distributed service enabling stream viewers to be notified when a speedrunner is on pace during their run.",
+  "author": "Craig Gordon",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.556.0"
+  }
+}

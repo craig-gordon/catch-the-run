@@ -1,0 +1,16 @@
+{
+  "ProviderName": "test",
+  "ConsumerName": "test2",
+  "Protocol": "EMAIL",
+  "Endpoint": "test@test.com",
+  "DiscordServerId": null,
+  "FilterPolicy": {
+    "Type": "BLACKLIST",
+    "Games": [
+      "Super Mario 64"
+    ],
+    "Categories": [
+      "Super Mario World_Any%"
+    ]
+  }
+}

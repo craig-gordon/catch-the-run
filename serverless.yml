@@ -22,7 +22,7 @@ service: catch-the-run
 provider:
   name: aws
   region: us-east-1
-  runtime: dotnetcore2.1
+  runtime: nodejs10.x
 
 # you can overwrite defaults here
 #  stage: dev
@@ -49,18 +49,18 @@ provider:
 #    variable1: value1
 
 package:
-  artifact: bin/release/netcoreapp2.1/catch-the-run.zip
+  artifact: bin/release/nodejs10.x/catch-the-run-node.zip
   individually: true
 
 functions:
-  CreateFeed:
-    handler: CatchTheRun::CatchTheRun.FeedManagement.CreateFeed::Execute
+  createFeed:
+    handler: feedManagement/createFeed.createFeed
 
-  CreateSubscription:
-    handler: CatchTheRun::CatchTheRun.SubscriptionManagement.CreateSubscription::Execute
+  createSubscription:
+    handler: subscriptionManagement/createSubscription.createSubscription
 
-  ProcessEvent:
-    handler: CatchTheRun::CatchTheRun.EventProcessing.ProcessEvent::Execute
+  processEvent:
+    handler: eventProcessing/processEvent.processEvent
         
     # you can add packaging information here
     #  exclude:
