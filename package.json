@@ -5,6 +5,7 @@
   "author": "Craig Gordon",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.556.0"
+    "aws-sdk": "^2.556.0",
+    "web-push": "^3.4.1"
   }
 }
