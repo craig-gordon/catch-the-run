@@ -1,16 +1,12 @@
 {
-  "ProviderName": "test",
-  "ConsumerName": "test2",
-  "Protocol": "EMAIL",
-  "Endpoint": "test@test.com",
+  "ProviderName": "cyghfer",
+  "ConsumerName": "test",
+  "Protocol": "WEBPUSH",
+  "Endpoint": "https://fcm.googleapis.com/fcm/send/eXlMB54xIuQ:APA91bG5UiZIv5wnpz7UEh8faZR2Du5mapaZYkF5Zyep8nsYBvkVI_JxtYKO04SH8sc4YNQHwAGbhtPm7TofPyJLhoQifJjfnku4SoTgmJHGtr2SDWcnusELbk3nsgEOOL17EMFbPVNp",
   "DiscordServerId": null,
   "FilterPolicy": {
     "Type": "BLACKLIST",
-    "Games": [
-      "Super Mario 64"
-    ],
-    "Categories": [
-      "Super Mario World_Any%"
-    ]
+    "Games": ["Super Metroid"],
+    "Categories": ["Super Mario World_Any% No Cape No Star World"]
   }
 }
